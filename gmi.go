@@ -9,15 +9,28 @@ import (
 	"time"
 )
 
+const (
+	DefaultTimeout = 300
+)
+
 // GMI is your client
 type GMI struct {
-	APIVersion string
-	APIKey     string
+	APIVersion    string
+	APIKey        string
+	SecondTimeout time.Duration
 }
 
 func (gmi *GMI) do(path string, methode string, in map[string]interface{}, out interface{}) error {
 	// Create client
-	client := &http.Client{}
+
+	timeout := gmi.SecondTimeout
+	if timeout == 0 {
+		timeout = DefaultTimeout
+	}
+
+	client := &http.Client{
+		Timeout: time.Second * timeout,
+	}
 
 	// add key
 	if in == nil {
