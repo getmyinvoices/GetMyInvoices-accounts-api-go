@@ -2,10 +2,10 @@
 
 # gogmi is a golang-library for getmyinvoices.com
 
-Here you can find the API-documentation: https://api.getmyinvoices.com/accounts/v1/doc/#
-
 ## Already implemented
 
+### V1
+Here you can find the API-documentation: https://api.getmyinvoices.com/accounts/v1/doc/#
 ✔ list supplieres  
 ✔ get specific supplier  
 ✔ list invoices  
@@ -16,11 +16,27 @@ Here you can find the API-documentation: https://api.getmyinvoices.com/accounts/
 ✘ update custom supplier  
 ✘ delete custom supplier  
 
+### V2
+Here you can find the API-documentation: https://api.getmyinvoices.com/accounts/v2/doc/#
+✘ get company list  
+✘ get one company  
+✘ get document list  
+✘ get one document  
+✘ upload new document  
+✘ update document  
+✔ get country list  
+✘ get custom company  
+✘ add custom company  
+✘ delete custom company  
+✘ get attachment list  
+✘ upload one attachment
+✘ delete one attachment  
+
 ## Getting started
 
 ```golang
 client := gogmi.GMI{
-    APIVersion: "v1",
+    APIVersion: "v2",
     APIKey:     "your-API-Key",
 }
 suppliers, err := client.ListSuppliers()
