@@ -9,28 +9,37 @@ import (
 	"time"
 )
 
+type version string
+
 const (
-	DefaultTimeout = 300
+	// V1 stands for version v1
+	V1 version = "v1"
+	// V2 stands for version v2
+	V2 version = "v2"
 )
 
 // GMI is your client
 type GMI struct {
-	APIVersion    string
-	APIKey        string
-	SecondTimeout time.Duration
+	APIVersion string
+	APIKey     string
 }
 
-func (gmi *GMI) do(path string, methode string, in map[string]interface{}, out interface{}) error {
+func (gmi *GMI) do(path string, methode string, in map[string]interface{}, out interface{}, supportedVs ...version) error {
+	// check support
+	checkSupport := func() error {
+		for _, v := range supportedVs {
+			if string(v) == gmi.APIVersion {
+				return nil
+			}
+		}
+		return fmt.Errorf("function '%s' is not supported for %s", path, gmi.APIVersion)
+	}
+	if err := checkSupport(); err != nil {
+		return err
+	}
+
 	// Create client
-
-	timeout := gmi.SecondTimeout
-	if timeout == 0 {
-		timeout = DefaultTimeout
-	}
-
-	client := &http.Client{
-		Timeout: time.Second * timeout,
-	}
+	client := &http.Client{}
 
 	// add key
 	if in == nil {
@@ -62,20 +71,20 @@ func (gmi *GMI) do(path string, methode string, in map[string]interface{}, out i
 
 // ListSuppliers give a list of all suppliers
 func (gmi *GMI) ListSuppliers() (suppliers Suppliers, err error) {
-	err = gmi.do("listSuppliers", http.MethodPost, nil, &suppliers)
+	err = gmi.do("listSuppliers", http.MethodPost, nil, &suppliers, V1)
 	return
 }
 
 // GetSupplier returns a specific supplier
 func (gmi *GMI) GetSupplier(primUID int) (supplier Supplier, err error) {
-	err = gmi.do("getSupplier", http.MethodPost, map[string]interface{}{"supplier_id": primUID}, &supplier)
+	err = gmi.do("getSupplier", http.MethodPost, map[string]interface{}{"supplier_id": primUID}, &supplier, V1)
 	return
 }
 
 // ListInvoices returns all invoices
 func (gmi *GMI) ListInvoices() (invoices []Invoice, err error) {
 	var rack RecordsRack
-	err = gmi.do("listInvoices", http.MethodPost, nil, &rack)
+	err = gmi.do("listInvoices", http.MethodPost, nil, &rack, V1)
 	invoices = rack.Invoices
 	return
 }
@@ -85,19 +94,19 @@ func (gmi *GMI) ListInvoicesFilterByDate(startDate time.Time) (invoices []Invoic
 	var rack RecordsRack
 	in := map[string]interface{}{}
 	in["start_date_filter"] = startDate.Format("2006-01-02")
-	err = gmi.do("listInvoices", http.MethodPost, nil, &rack)
+	err = gmi.do("listInvoices", http.MethodPost, nil, &rack, V1)
 	invoices = rack.Invoices
 	return
 }
 
 // GetInvoice returns specific invoice
 func (gmi *GMI) GetInvoice(primUID PrimUID) (rack interface{}, err error) {
-	err = gmi.do("getInvoice", http.MethodPost, map[string]interface{}{"invoice_prim_uid": primUID}, &rack)
+	err = gmi.do("getInvoice", http.MethodPost, map[string]interface{}{"invoice_prim_uid": primUID}, &rack, V1)
 	return
 }
 
 // GetCountries returns a slice of countries
 func (gmi *GMI) GetCountries() (countries Countries, err error) {
-	err = gmi.do("getCountries", http.MethodPost, nil, &countries)
+	err = gmi.do("getCountries", http.MethodPost, nil, &countries, V1)
 	return
 }

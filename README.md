@@ -15,6 +15,9 @@ Here you can find the API-documentation: https://api.getmyinvoices.com/accounts/
 ✘ add custom supplier  
 ✘ update custom supplier  
 ✘ delete custom supplier  
+✘ get attachment list  
+✘ upload one attachment
+✘ delete one attachment  
 
 ### V2
 Here you can find the API-documentation: https://api.getmyinvoices.com/accounts/v2/doc/#
@@ -29,7 +32,7 @@ Here you can find the API-documentation: https://api.getmyinvoices.com/accounts/
 ✘ add custom company  
 ✘ delete custom company  
 ✘ get attachment list  
-✘ upload one attachment
+✘ upload one attachment  
 ✘ delete one attachment  
 
 ## Getting started
