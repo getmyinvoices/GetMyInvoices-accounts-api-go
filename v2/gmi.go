@@ -68,7 +68,7 @@ func (gmi *GMI) ListDocuments() (documents []Document, err error) {
 }
 
 // ListDocuments returns all documents with the given parameters. For a list of valid parameters have a look at https://api.getmyinvoices.com/accounts/v2/doc/index.html#listdocuments_post
-func (gmi *GMI) ListDocumentsWithParams() (documents []Document, params map[string]interface{}, err error) {
+func (gmi *GMI) ListDocumentsWithParams(params map[string]interface{}) (documents []Document, err error) {
 	var rack RecordsRack
 	err = gmi.do("listDocuments", http.MethodPost, params, &rack)
 	documents = rack.Documents
