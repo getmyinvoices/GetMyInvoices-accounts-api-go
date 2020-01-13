@@ -53,9 +53,9 @@ func (gmi *GMI) ListCompanies() (companies Companies, err error) {
 	return
 }
 
-// GetSupplier returns a specific company
+// GetCompany returns a specific company
 func (gmi *GMI) GetCompany(primUID int) (company Company, err error) {
-	err = gmi.do("getCompany", http.MethodPost, map[string]interface{}{"supplier_id": primUID}, &company)
+	err = gmi.do("getCompany", http.MethodPost, map[string]interface{}{"company_id": primUID}, &company)
 	return
 }
 
@@ -75,19 +75,19 @@ func (gmi *GMI) ListDocumentsWithParams() (documents []Document, params map[stri
 	return
 }
 
-// ListInvoicesFilterByDate returns all invoices with a filter by date
+// ListDocumentsFilterByDate returns all Documents with a filter by date
 func (gmi *GMI) ListDocumentsFilterByDate(startDate time.Time) (documents []Document, err error) {
 	var rack RecordsRack
 	in := map[string]interface{}{}
 	in["start_date_filter"] = startDate.Format("2006-01-02")
-	err = gmi.do("listInvoices", http.MethodPost, nil, &rack)
+	err = gmi.do("listDocuments", http.MethodPost, nil, &rack)
 	documents = rack.Documents
 	return
 }
 
-// GetInvoice returns specific invoice
+// GetDocument returns specific document
 func (gmi *GMI) GetDocument(primUID PrimUID) (rack interface{}, err error) {
-	err = gmi.do("getDocument", http.MethodPost, map[string]interface{}{"invoice_prim_uid": primUID}, &rack)
+	err = gmi.do("getDocument", http.MethodPost, map[string]interface{}{"document_prim_uid": primUID}, &rack)
 	return
 }
 
