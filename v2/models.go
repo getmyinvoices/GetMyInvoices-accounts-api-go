@@ -2,11 +2,11 @@ package gogmi
 
 // Company is the model for GMI-company
 type Company struct {
-	PrimUID     uint `json:"prim_uid"`
-	Name        string  `json:"name"`
-	CompanyType string  `json:"company_type"`
-	Note        string  `json:"note"`
-	Tags        string  `json:"tags"`
+	PrimUID     uint   `json:"prim_uid"`
+	Name        string `json:"name"`
+	CompanyType string `json:"company_type"`
+	Note        string `json:"note"`
+	Tags        string `json:"tags"`
 }
 
 // Companies is a slice of companies
@@ -14,18 +14,18 @@ type Companies []Company
 
 // Invoice represent a record
 type Document struct {
-	PrimUID         uint `json:"prim_uid,omitempty"`
+	PrimUID         uint   `json:"prim_uid,omitempty"`
 	CreatedAt       string `json:"created_at,omitempty"`
-	CompanyUID      int `json:"company_uid,omitempty"`
+	CompanyUID      int    `json:"company_uid,omitempty"`
 	DocumentType    string `json:"document_type,omitempty"`
 	DocumentNumber  string `json:"document_number,omitempty"`
 	DocumentDate    string `json:"document_date,omitempty"`
 	DocumentDueDate string `json:"document_due_date,omitempty"`
-	NetAmount       int `json:"net_amount,omitempty"`
-	Vat             int `json:"vat,omitempty"`
-	GrossAmount     int `json:"gross_amount,omitempty"`
+	NetAmount       string `json:"net_amount,omitempty"`
+	Vat             string `json:"vat,omitempty"`
+	GrossAmount     string `json:"gross_amount,omitempty"`
 	Currency        string `json:"currency,omitempty"`
-	IsArchived      int `json:"is_archived,omitempty"`
+	IsArchived      string `json:"is_archived,omitempty"`
 	IsOcrCompleted  int    `json:"is_ocr_completed,omitempty"`
 	Tags            string `json:"tags,omitempty"`
 	Note            string `json:"note,omitempty"`
@@ -52,17 +52,17 @@ type Document struct {
 		RoutingNumber        string `json:"routing_number,omitempty"`
 		IfscCode             string `json:"ifsc_code,omitempty"`
 		RoutingCode          string `json:"routing_code,omitempty"`
-		CashDiscountDate     string `json:"cash_discount_date,omitempty"`
-		CashDiscountValue    int `json:"cash_discount_value,omitempty"`
+		CashDiscountDate     int    `json:"cash_discount_date,omitempty"`
+		CashDiscountValue    string `json:"cash_discount_value,omitempty"`
 	} `json:"payment_details,omitempty"`
 }
 
 // RecordsRack holds all records
 type RecordsRack struct {
-	Documents   []Document `json:"records"`
-	TotalCount string    `json:"total_count"`
-	Start      int       `json:"start"`
-	Offset     int       `json:"offset"`
+	Documents  []Document `json:"records"`
+	TotalCount string     `json:"total_count"`
+	Start      int        `json:"start"`
+	Offset     int        `json:"offset"`
 }
 
 // Countries is a slice of Country
@@ -70,9 +70,9 @@ type Countries []Country
 
 // Country represent a country
 type Country struct {
-	PrimUID     uint `json:"prim_uid"`
+	PrimUID     uint   `json:"prim_uid"`
 	Name        string `json:"name"`
 	CountryCode string `json:"country_code"`
-	Vat         int `json:"vat"`
-	IsEu        int `json:"is_eu"`
+	Vat         int    `json:"vat"`
+	IsEu        int    `json:"is_eu"`
 }
