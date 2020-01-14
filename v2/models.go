@@ -39,18 +39,18 @@ type Companies []Company
 
 // Invoice represent a record
 type Document struct {
-	PrimUID         string `json:"prim_uid,omitempty"`
+	PrimUID         PrimUID `json:"prim_uid,omitempty"`
 	CreatedAt       string `json:"created_at,omitempty"`
-	CompanyUID      string `json:"company_uid,omitempty"`
+	CompanyUID      int `json:"company_uid,omitempty"`
 	DocumentType    string `json:"document_type,omitempty"`
 	DocumentNumber  string `json:"document_number,omitempty"`
 	DocumentDate    string `json:"document_date,omitempty"`
 	DocumentDueDate string `json:"document_due_date,omitempty"`
-	NetAmount       string `json:"net_amount,omitempty"`
-	Vat             string `json:"vat,omitempty"`
-	GrossAmount     string `json:"gross_amount,omitempty"`
+	NetAmount       int `json:"net_amount,omitempty"`
+	Vat             int `json:"vat,omitempty"`
+	GrossAmount     int `json:"gross_amount,omitempty"`
 	Currency        string `json:"currency,omitempty"`
-	IsArchived      string `json:"is_archived,omitempty"`
+	IsArchived      int `json:"is_archived,omitempty"`
 	IsOcrCompleted  int    `json:"is_ocr_completed,omitempty"`
 	Tags            string `json:"tags,omitempty"`
 	Note            string `json:"note,omitempty"`
@@ -78,7 +78,7 @@ type Document struct {
 		IfscCode             string `json:"ifsc_code,omitempty"`
 		RoutingCode          string `json:"routing_code,omitempty"`
 		CashDiscountDate     string `json:"cash_discount_date,omitempty"`
-		CashDiscountValue    string `json:"cash_discount_value,omitempty"`
+		CashDiscountValue    int `json:"cash_discount_value,omitempty"`
 	} `json:"payment_details,omitempty"`
 }
 
@@ -95,9 +95,9 @@ type Countries []Country
 
 // Country represent a country
 type Country struct {
-	PrimUID     string `json:"prim_uid"`
+	PrimUID     PrimUID `json:"prim_uid"`
 	Name        string `json:"name"`
 	CountryCode string `json:"country_code"`
-	Vat         string `json:"vat"`
-	IsEu        string `json:"is_eu"`
+	Vat         int `json:"vat"`
+	IsEu        int `json:"is_eu"`
 }
