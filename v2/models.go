@@ -1,33 +1,8 @@
 package gogmi
 
-import (
-	"encoding/json"
-	"strconv"
-)
-
-// PrimUID is just a workaround, cause' there is a bug in the API.
-// /getSuppliers returns an string instead an int.
-type PrimUID int
-
-func (prim *PrimUID) UnmarshalJSON(b []byte) error {
-	if b[0] != '"' {
-		return json.Unmarshal(b, (*int)(prim))
-	}
-	var s string
-	if err := json.Unmarshal(b, &s); err != nil {
-		return err
-	}
-	i, err := strconv.Atoi(s)
-	if err != nil {
-		return err
-	}
-	*prim = PrimUID(i)
-	return nil
-}
-
 // Company is the model for GMI-company
 type Company struct {
-	PrimUID     PrimUID `json:"prim_uid"`
+	PrimUID     uint `json:"prim_uid"`
 	Name        string  `json:"name"`
 	CompanyType string  `json:"company_type"`
 	Note        string  `json:"note"`
@@ -39,7 +14,7 @@ type Companies []Company
 
 // Invoice represent a record
 type Document struct {
-	PrimUID         PrimUID `json:"prim_uid,omitempty"`
+	PrimUID         uint `json:"prim_uid,omitempty"`
 	CreatedAt       string `json:"created_at,omitempty"`
 	CompanyUID      int `json:"company_uid,omitempty"`
 	DocumentType    string `json:"document_type,omitempty"`
@@ -95,7 +70,7 @@ type Countries []Country
 
 // Country represent a country
 type Country struct {
-	PrimUID     PrimUID `json:"prim_uid"`
+	PrimUID     uint `json:"prim_uid"`
 	Name        string `json:"name"`
 	CountryCode string `json:"country_code"`
 	Vat         int `json:"vat"`
