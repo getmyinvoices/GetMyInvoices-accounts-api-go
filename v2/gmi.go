@@ -9,10 +9,9 @@ import (
 	"time"
 )
 
-
 // Version 2 of your GMI Client
 type GMI struct {
-	APIKey     string
+	APIKey string
 }
 
 func (gmi *GMI) do(path string, methode string, in map[string]interface{}, out interface{}) error {
@@ -86,7 +85,7 @@ func (gmi *GMI) ListDocumentsFilterByDate(startDate time.Time) (documents []Docu
 }
 
 // GetDocument returns specific document
-func (gmi *GMI) GetDocument(primUID PrimUID) (rack interface{}, err error) {
+func (gmi *GMI) GetDocument(primUID int) (rack interface{}, err error) {
 	err = gmi.do("getDocument", http.MethodPost, map[string]interface{}{"document_prim_uid": primUID}, &rack)
 	return
 }

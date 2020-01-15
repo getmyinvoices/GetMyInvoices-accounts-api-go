@@ -1,37 +1,12 @@
 package gogmi
 
-import (
-	"encoding/json"
-	"strconv"
-)
-
-// PrimUID is just a workaround, cause' there is a bug in the API.
-// /getSuppliers returns an string instead an int.
-type PrimUID int
-
-func (prim *PrimUID) UnmarshalJSON(b []byte) error {
-	if b[0] != '"' {
-		return json.Unmarshal(b, (*int)(prim))
-	}
-	var s string
-	if err := json.Unmarshal(b, &s); err != nil {
-		return err
-	}
-	i, err := strconv.Atoi(s)
-	if err != nil {
-		return err
-	}
-	*prim = PrimUID(i)
-	return nil
-}
-
 // Company is the model for GMI-company
 type Company struct {
-	PrimUID     PrimUID `json:"prim_uid"`
-	Name        string  `json:"name"`
-	CompanyType string  `json:"company_type"`
-	Note        string  `json:"note"`
-	Tags        string  `json:"tags"`
+	PrimUID     uint   `json:"prim_uid"`
+	Name        string `json:"name"`
+	CompanyType string `json:"company_type"`
+	Note        string `json:"note"`
+	Tags        string `json:"tags"`
 }
 
 // Companies is a slice of companies
@@ -39,9 +14,9 @@ type Companies []Company
 
 // Invoice represent a record
 type Document struct {
-	PrimUID         string `json:"prim_uid,omitempty"`
+	PrimUID         uint   `json:"prim_uid,omitempty"`
 	CreatedAt       string `json:"created_at,omitempty"`
-	CompanyUID      string `json:"company_uid,omitempty"`
+	CompanyUID      int    `json:"company_uid,omitempty"`
 	DocumentType    string `json:"document_type,omitempty"`
 	DocumentNumber  string `json:"document_number,omitempty"`
 	DocumentDate    string `json:"document_date,omitempty"`
@@ -77,17 +52,17 @@ type Document struct {
 		RoutingNumber        string `json:"routing_number,omitempty"`
 		IfscCode             string `json:"ifsc_code,omitempty"`
 		RoutingCode          string `json:"routing_code,omitempty"`
-		CashDiscountDate     string `json:"cash_discount_date,omitempty"`
+		CashDiscountDate     int    `json:"cash_discount_date,omitempty"`
 		CashDiscountValue    string `json:"cash_discount_value,omitempty"`
 	} `json:"payment_details,omitempty"`
 }
 
 // RecordsRack holds all records
 type RecordsRack struct {
-	Documents   []Document `json:"records"`
-	TotalCount string    `json:"total_count"`
-	Start      int       `json:"start"`
-	Offset     int       `json:"offset"`
+	Documents  []Document `json:"records"`
+	TotalCount string     `json:"total_count"`
+	Start      int        `json:"start"`
+	Offset     int        `json:"offset"`
 }
 
 // Countries is a slice of Country
@@ -95,9 +70,9 @@ type Countries []Country
 
 // Country represent a country
 type Country struct {
-	PrimUID     string `json:"prim_uid"`
+	PrimUID     uint   `json:"prim_uid"`
 	Name        string `json:"name"`
 	CountryCode string `json:"country_code"`
-	Vat         string `json:"vat"`
-	IsEu        string `json:"is_eu"`
+	Vat         int    `json:"vat"`
+	IsEu        int    `json:"is_eu"`
 }
