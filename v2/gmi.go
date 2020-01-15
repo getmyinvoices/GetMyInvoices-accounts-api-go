@@ -46,6 +46,11 @@ func (gmi *GMI) do(path string, methode string, in map[string]interface{}, out i
 	return nil
 }
 
+func (gmi *GMI) CheckAPIStatus() (status ApiStatus, err error) {
+	err = gmi.do("apiStatus", http.MethodPost, nil, &status)
+	return
+}
+
 // ListCompanies give a list of all companies
 func (gmi *GMI) ListCompanies() (companies Companies, err error) {
 	err = gmi.do("listCompanies", http.MethodPost, nil, &companies)
