@@ -12,6 +12,10 @@ type Company struct {
 // Companies is a slice of companies
 type Companies []Company
 
+type ApiStatus struct {
+	Success bool    `json:"success,omitempty"`
+}
+
 // Invoice represent a record
 type Document struct {
 	PrimUID         uint   `json:"prim_uid,omitempty"`
