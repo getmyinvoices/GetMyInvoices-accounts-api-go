@@ -38,14 +38,14 @@ type Company struct {
 type Companies []Company
 
 type ApiStatus struct {
-	Success bool    `json:"success,omitempty"`
+	Success bool `json:"success,omitempty"`
 }
 
 // Invoice represent a record
 type Document struct {
 	PrimUID         uint   `json:"prim_uid,omitempty"`
 	CreatedAt       string `json:"created_at,omitempty"`
-	CompanyUID      uint    `json:"company_uid,omitempty"`
+	CompanyUID      uint   `json:"company_uid,omitempty"`
 	DocumentType    string `json:"document_type,omitempty"`
 	DocumentNumber  string `json:"document_number,omitempty"`
 	DocumentDate    string `json:"document_date,omitempty"`
@@ -64,25 +64,25 @@ type Document struct {
 	PaymentStatus   string `json:"payment_status,omitempty"`
 	PaymentMethod   string `json:"payment_method,omitempty"`
 	PaymentDetails  struct {
-		SenderEmail          string `json:"sender_email,omitempty"`
-		RecipientEmail       string `json:"recipient_email,omitempty"`
-		TransactionId        string `json:"transaction_id,omitempty"`
-		CardNumber           string `json:"card_number,omitempty"`
-		SepaCreditorId       string `json:"sepa_creditor_id,omitempty"`
-		SepaMandateReference string `json:"sepa_mandate_reference,omitempty"`
-		PurposeOfUsage       string `json:"purpose_of_usage,omitempty"`
-		Iban                 string `json:"iban,omitempty"`
-		Bic                  string `json:"bic,omitempty"`
-		AccountHolderName    string `json:"account_holder_name,omitempty"`
-		AccountNumber        string `json:"account_number,omitempty"`
-		BankName             string `json:"bank_name,omitempty"`
-		BankAddress          string `json:"bank_address,omitempty"`
-		SortCode             string `json:"sort_code,omitempty"`
-		RoutingNumber        string `json:"routing_number,omitempty"`
-		IfscCode             string `json:"ifsc_code,omitempty"`
-		RoutingCode          string `json:"routing_code,omitempty"`
-		CashDiscountDate     CustomDate    `json:"cash_discount_date,omitempty"`
-		CashDiscountValue    string `json:"cash_discount_value,omitempty"`
+		SenderEmail          string     `json:"sender_email,omitempty"`
+		RecipientEmail       string     `json:"recipient_email,omitempty"`
+		TransactionId        string     `json:"transaction_id,omitempty"`
+		CardNumber           string     `json:"card_number,omitempty"`
+		SepaCreditorId       string     `json:"sepa_creditor_id,omitempty"`
+		SepaMandateReference string     `json:"sepa_mandate_reference,omitempty"`
+		PurposeOfUsage       string     `json:"purpose_of_usage,omitempty"`
+		Iban                 string     `json:"iban,omitempty"`
+		Bic                  string     `json:"bic,omitempty"`
+		AccountHolderName    string     `json:"account_holder_name,omitempty"`
+		AccountNumber        string     `json:"account_number,omitempty"`
+		BankName             string     `json:"bank_name,omitempty"`
+		BankAddress          string     `json:"bank_address,omitempty"`
+		SortCode             string     `json:"sort_code,omitempty"`
+		RoutingNumber        string     `json:"routing_number,omitempty"`
+		IfscCode             string     `json:"ifsc_code,omitempty"`
+		RoutingCode          string     `json:"routing_code,omitempty"`
+		CashDiscountDate     CustomDate `json:"cash_discount_date,omitempty"`
+		CashDiscountValue    string     `json:"cash_discount_value,omitempty"`
 	} `json:"payment_details,omitempty"`
 }
 
